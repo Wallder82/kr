@@ -29,6 +29,6 @@ CREATE TABLE houseroom (
     balcony numeric(20, 2),
     height  numeric(20, 2),
     building_id varchar(20) NOT NULL,
-    CONSTRAINT houseroom_pkey PRIMARY KEY (id)
+    CONSTRAINT houseroom_pkey PRIMARY KEY (id),
     CONSTRAINT houseroom_building_id_fk FOREIGN KEY (building_id) REFERENCES building(kadastr)
 )
