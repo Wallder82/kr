@@ -4,7 +4,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
+/**
+ * Квартира
+ */
 @Data
 @NoArgsConstructor
 @Entity
@@ -36,7 +40,8 @@ public class Houseroom {
     /**
      * Квартира в двух уровнях
      */
-    private Boolean level;
+    @Column(name = "two_level")
+    private Boolean twoLevel;
 
     /**
      * Общая площадь квартиры
@@ -62,5 +67,18 @@ public class Houseroom {
      * Высота квартиры
      */
     private Float height;
+
+    /**
+     * Здание
+     */
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "building_id")
+    private Building building;
+
+    /**
+     * Комнаты
+     */
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> roomList;
 
 }

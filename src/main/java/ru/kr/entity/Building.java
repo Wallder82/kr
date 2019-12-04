@@ -4,8 +4,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
-
+/**
+ * Здание
+ */
 @Data
 @NoArgsConstructor
 @Entity
@@ -36,7 +39,8 @@ public class Building {
     /**
      * Год постройки здания
      */
-    private Integer year;
+    @Column(name = "construction_year")
+    private Integer constructionYear;
 
     /**
      * Материал стен здания
@@ -87,5 +91,11 @@ public class Building {
      * Наличие лифта
      */
     private Boolean elevator;
+
+    /**
+     * Квартиры
+     */
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Houseroom> houseroomList;
 
 }

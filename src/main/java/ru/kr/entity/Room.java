@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Комната
+ */
 @Data
 @NoArgsConstructor
 @Entity
@@ -57,5 +60,12 @@ public class Room {
      * Число элементов в батарее отопления
      */
     private Integer sections;
+
+    /**
+     * Квартира
+     */
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "houseroom_id")
+    private Houseroom houseroom;
 
 }
