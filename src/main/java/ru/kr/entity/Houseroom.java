@@ -78,7 +78,7 @@ public class Houseroom {
     /**
      * Комнаты
      */
-    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "houseroom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> roomList;
 
 }
