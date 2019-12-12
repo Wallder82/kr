@@ -13,4 +13,9 @@ public class MainController {
     public String greeting(Map<String, Object> model) {
         return "greeting";
     }
+
+    @GetMapping
+    public String main(Map<String, Object> model) {
+        return "main";
+    }
 }

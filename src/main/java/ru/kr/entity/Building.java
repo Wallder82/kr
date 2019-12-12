@@ -39,7 +39,6 @@ public class Building {
     /**
      * Год постройки здания
      */
-    @Column(name = "construction_year")
     private Integer constructionYear;
 
     /**
