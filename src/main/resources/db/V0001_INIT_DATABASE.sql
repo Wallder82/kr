@@ -23,7 +23,7 @@ CREATE TABLE houseroom (
     storey numeric(2),
     rooms numeric(1),
     two_level Boolean,
-    squareFlat numeric(20, 2),
+    square_flat numeric(20, 2),
     dwell numeric(20, 2),
     branch numeric(20, 2),
     balcony numeric(20, 2),

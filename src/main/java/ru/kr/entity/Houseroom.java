@@ -71,14 +71,14 @@ public class Houseroom {
     /**
      * Здание
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "building_id")
+    @ManyToOne
+    @JoinColumn(name = "building_kadastr")
     private Building building;
 
     /**
      * Комнаты
      */
-    @OneToMany(mappedBy = "houseroom", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "houseroom", cascade = CascadeType.ALL)
     private List<Room> roomList;
 
 }
