@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class Building {
     /**
      * Площадь земельного участка
      */
-    private Float land;
+    private BigDecimal land;
 
     /**
      * Год постройки здания
@@ -74,7 +75,7 @@ public class Building {
     /**
      * Площадь квартир
      */
-    private Float square;
+    private BigDecimal square;
 
     /**
      * Фото здания

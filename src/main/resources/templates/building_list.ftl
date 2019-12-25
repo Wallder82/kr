@@ -2,7 +2,11 @@
 
 <@c.page>
 <div>
-    <table>
+    <a href="/building/edit">Добавить новый дом</a>
+</div>
+<br>
+<div>
+    <table border="1">
         <tr>
             <td>Кадастровый номер здания</td>
             <td>Адрес здания</td>
@@ -19,25 +23,28 @@
             <td>Фото здания</td>
             <td>Количество квартир в здании</td>
             <td>Наличие лифта</td>
-            <td>Квартиры</td>
+            <td></td>
+            <td></td>
         </tr>
         <#list building_list as building>
             <tr>
-                <td>${building.kadastr}</td>
-                <td>${building.address}</td>
-                <td>${building.district}</td>
-                <td>${building.land}</td>
-                <td>${building.constructionYear}</td>
-                <td>${building.material}</td>
-                <td>${building.base}</td>
-                <td>${building.comment}</td>
-                <td>${building.wear}</td>
-                <td>${building.flow}</td>
-                <td>${building.line}</td>
-                <td>${building.square}</td>
-                <td>${building.picture}</td>
-                <td>${building.flats}</td>
-                <td>${building.elevator}</td>
+                <td>${building.kadastr?ifExists}</td>
+                <td>${building.address?ifExists}</td>
+                <td>${building.district?ifExists}</td>
+                <td>${building.land?ifExists}</td>
+                <td>${building.constructionYear?ifExists}</td>
+                <td>${building.material?ifExists}</td>
+                <td>${building.base?ifExists}</td>
+                <td>${building.comment?ifExists}</td>
+                <td>${building.wear?ifExists}</td>
+                <td>${building.flow?ifExists}</td>
+                <td>${building.line?ifExists}</td>
+                <td>${building.square?ifExists}</td>
+                <td> </td>
+                <td>${building.flats?ifExists}</td>
+                <td>${building.elevator?ifExists?string}</td>
+                <td><a href="/building/edit/${building.kadastr}">Изменить</a></td>
+                <td><a href="/building/delete/${building.kadastr}">Удалить</a></td>
             </tr>
         </#list>
     </table>

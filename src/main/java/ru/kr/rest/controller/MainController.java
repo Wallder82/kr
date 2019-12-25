@@ -31,25 +31,4 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/create_building")
-    public String getBuilding(Map<String, Object> model) {
-        return "create_building";
-    }
-
-    @PostMapping(value = "/create_building")
-    public String postBuilding(@RequestParam("picture") MultipartFile picture, @RequestParam Map<String, Object> model) throws IOException {
-        ModelMapper mapper = new ModelMapper();
-        Building building = mapper.map(model, Building.class);
-        if (picture != null) {
-            building.setPicture(picture.getBytes());
-        }
-        buildingRepository.saveAndFlush(building);
-        return "create_building";
-    }
-
-    @GetMapping("/building/list")
-    public String getBuildingList (Model model) {
-        model.addAttribute("building_list", buildingRepository.findAll());
-        return "building_list";
-    }
 }
