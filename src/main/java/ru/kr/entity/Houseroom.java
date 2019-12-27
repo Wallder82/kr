@@ -1,15 +1,19 @@
 package ru.kr.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Квартира
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "houseroom")
@@ -46,32 +50,32 @@ public class Houseroom {
     /**
      * Общая площадь квартиры
      */
-    private Float squareFlat;
+    private BigDecimal squareFlat;
 
     /**
      * Жилая площадь квартиры
      */
-    private Float dwell;
+    private BigDecimal dwell;
 
     /**
      * Вспомогательная площадь квартиры
      */
-    private Float branch;
+    private BigDecimal branch;
 
     /**
      * Площадь балкона
      */
-    private Float balcony;
+    private BigDecimal balcony;
 
     /**
      * Высота квартиры
      */
-    private Float height;
+    private BigDecimal height;
 
     /**
      * Здание
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "building_kadastr")
     private Building building;
 

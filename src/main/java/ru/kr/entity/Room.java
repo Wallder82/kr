@@ -1,14 +1,18 @@
 package ru.kr.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Комната
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "room")
@@ -24,12 +28,12 @@ public class Room {
     /**
      * Номер помещения в квартире
      */
-    private Integer Record;
+    private Integer record;
 
     /**
      *Площадь помещения
      */
-    private Float squareRoom;
+    private BigDecimal squareRoom;
 
     /**
      * Размеры помещения  в плане
@@ -37,7 +41,7 @@ public class Room {
     private String size;
 
     /**
-     * Назначение (кухня, ниша …
+     * Назначение (кухня, ниша …)
      */
     private String name;
 
@@ -49,7 +53,7 @@ public class Room {
     /**
      * Высота помещения
      */
-    private Float heightRoom;
+    private BigDecimal heightRoom;
 
     /**
      * Число розеток в помещении
@@ -64,7 +68,7 @@ public class Room {
     /**
      * Квартира
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "houseroom_id")
     private Houseroom houseroom;
 

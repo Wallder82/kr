@@ -2,7 +2,7 @@
 
 <@c.page>
 <div>
-    <a href="/building/edit">Добавить новый дом</a>
+    <a href="/building/edit">Добавить новое здание</a>
 </div>
 <br>
 <div>

@@ -17,14 +17,14 @@ import java.util.Map;
 @RequestMapping("/building")
 public class BuildingController {
 
+    @Autowired
+    private BuildingRepository buildingRepository;
+
     @GetMapping("/list")
     public String getList (Model model) {
         model.addAttribute("building_list", buildingRepository.findAll());
         return "building_list";
     }
-
-    @Autowired
-    private BuildingRepository buildingRepository;
 
     @GetMapping("/edit")
     public String editForm(Model model) {
@@ -46,7 +46,7 @@ public class BuildingController {
         }
         buildingRepository.saveAndFlush(building);
         model.addAttribute("building_list", buildingRepository.findAll());
-        return "building_list";
+        return "redirect:/building/list";
     }
 
     @GetMapping("/delete/{building}")
@@ -55,6 +55,6 @@ public class BuildingController {
             buildingRepository.delete(building);
         }
         model.addAttribute("building_list", buildingRepository.findAll());
-        return "building_list";
+        return "redirect:/building/list";
     }
 }
