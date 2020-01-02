@@ -16,7 +16,6 @@
                 <tr><td>Количество этажей в здании</td><td><input type="number" name="flow" size="3" step="1" min="1" max="999" value="${building.flow?ifExists}"/></td></tr>
                 <tr><td>Расстояние от центра города. Метры</td><td><input type="number" name="line" size="5" step="1" min="0" max="99999" value="${building.line?ifExists}"/></td></tr>
                 <tr><td>Площадь квартир. Метры</td><td><input type="number" name="square" size="12" step="0.01" min="0.01" max="999999999999" value="${building.square?ifExists?string?replace(',','.')}"/></td></tr>
-                <tr><td>Количество квартир в здании</td><td><input type="number" name="flats" size="3" step="1" min="1" max="999" value="${building.flats?ifExists}"/></td></tr>
                 <tr><td>Наличие лифта</td><td>Да<input type="radio" name="elevator" value="true" <#if building.elevator == true>checked</#if>/> Нет<input type="radio" name="elevator" value="false" <#if building.elevator == false>checked</#if>/></td></tr>
                 <tr><td>Фото</td><td><input type="file" name="picture"/></td></tr>
             </table>
@@ -37,7 +36,7 @@
                 <tr><td>Количество этажей в здании</td><td><input type="number" name="flow" size="3" step="1" min="1" max="999"/></td></tr>
                 <tr><td>Расстояние от центра города. Метры</td><td><input type="number" name="line" size="5" step="1" min="0" max="99999"/></td></tr>
                 <tr><td>Площадь квартир. Метры</td><td><input type="number" name="square" size="12" step="0.01" min="0.01" max="999999999999"/></td></tr>
-                <tr><td>Количество квартир в здании</td><td><input type="number" name="flats" size="3" step="1" min="1" max="999"/></td></tr>
+                <tr><td>Количество квартир в здании</td><td><input type="hidden" name="flats" value="0"/></td></tr>
                 <tr><td>Наличие лифта</td><td>Да<input type="radio" name="elevator" value="true"/> Нет<input type="radio" name="elevator" value="false" checked/></td></tr>
                 <tr><td>Фото</td><td><input type="file" name="picture"/></td></tr>
             </table>
