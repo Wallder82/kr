@@ -1,5 +1,5 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<div>Отдел учета квартир БТИ</div>
+<h1>Отдел учета квартир БТИ</h1>
 </@c.page>

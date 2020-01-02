@@ -1,30 +1,30 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<div>
-    <a href="/building/edit">Добавить новое здание</a>
+<div class="container-fluid mt-5">
+    <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/building/edit">Добавить новое здание</a>
 </div>
 <br>
-<div>
-    <table border="1">
+<div class="container-fluid">
+    <table  class="table table-striped table-dark">
         <tr>
-            <td>Кадастровый номер здания</td>
-            <td>Адрес здания</td>
-            <td>Район города</td>
-            <td>Площадь земельного участка</td>
-            <td>Год постройки здания</td>
-            <td>Материал стен здания</td>
-            <td>Материал фундамента</td>
-            <td>Примечания</td>
-            <td>Износ в процентах</td>
-            <td>Количество этажей в здании</td>
-            <td>Расстояние от центра города</td>
-            <td>Площадь квартир</td>
-            <td>Фото здания</td>
-            <td>Количество квартир в здании</td>
-            <td>Наличие лифта</td>
-            <td></td>
-            <td></td>
+            <th scope="col">Кадастровый номер здания</th>
+            <th scope="col">Адрес здания</th>
+            <th scope="col">Район города</th>
+            <th scope="col">Площадь земельного участка</th>
+            <th scope="col">Год постройки здания</th>
+            <th scope="col">Материал стен здания</th>
+            <th scope="col">Материал фундамента</th>
+            <th scope="col">Примечания</th>
+            <th scope="col">Износ в процентах</th>
+            <th scope="col">Количество этажей в здании</th>
+            <th scope="col">Расстояние от центра города</th>
+            <th scope="col">Площадь квартир</th>
+            <th scope="col">Фото здания</th>
+            <th scope="col">Количество квартир в здании</th>
+            <th scope="col">Наличие лифта</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         <#list building_list as building>
             <tr>
@@ -43,8 +43,8 @@
                 <td> </td>
                 <td>${building.flats?ifExists}</td>
                 <td>${building.elevator?ifExists?string}</td>
-                <td><a href="/building/edit/${building.kadastr}">Изменить</a></td>
-                <td><a href="/building/delete/${building.kadastr}">Удалить</a></td>
+                <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/building/edit/${building.kadastr}">Изменить</a></td>
+                <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/building/delete/${building.kadastr}">Удалить</a></td>
             </tr>
         </#list>
     </table>

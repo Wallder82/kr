@@ -1,12 +1,12 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<div>
-    <a href="/houseroom/edit">Добавить новую квартиру</a>
+<div class="container-fluid mt-5">
+    <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/houseroom/edit">Добавить новую квартиру</a>
 </div>
 <br>
-<div>
-    <table border="1">
+<div class="container-fluid">
+    <table class="table table-striped table-dark">
         <tr>
             <td>ID записи в бд</td>
             <td>Номер квартиры</td>
@@ -35,8 +35,8 @@
             <td>${houseroom.balcony?ifExists}</td>
             <td>${houseroom.height?ifExists}</td>
             <td>${houseroom.building.kadastr?ifExists}</td>
-            <td><a href="/houseroom/edit/${houseroom.id}">Изменить</a></td>
-            <td><a href="/houseroom/delete/${houseroom.id}">Удалить</a></td>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/houseroom/edit/${houseroom.id}">Изменить</a></td>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/houseroom/delete/${houseroom.id}">Удалить</a></td>
         </tr>
     </#list>
     </table>

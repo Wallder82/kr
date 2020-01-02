@@ -1,12 +1,12 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<div>
-    <a href="/room/edit">Добавить новое помещение</a>
+<div class="container-fluid mt-5">
+    <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/room/edit">Добавить новое помещение</a>
 </div>
 <br>
-<div>
-    <table border="1">
+<div class="container-fluid">
+    <table class="table table-striped table-dark">
         <tr>
             <td>ID записи в бд</td>
             <td>Номер помещения в квартире</td>
@@ -33,8 +33,8 @@
             <td>${room.socket?ifExists}</td>
             <td>${room.sections?ifExists}</td>
             <td>${room.houseroom.id?ifExists}</td>
-            <td><a href="/room/edit/${room.id}">Изменить</a></td>
-            <td><a href="/room/delete/${room.id}">Удалить</a></td>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/room/edit/${room.id}">Изменить</a></td>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/room/delete/${room.id}">Удалить</a></td>
         </tr>
     </#list>
     </table>
