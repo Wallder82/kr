@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.kr.entity.Building;
 import ru.kr.entity.Houseroom;
 import ru.kr.entity.Room;
-import ru.kr.repository.BuildingRepository;
 import ru.kr.repository.HouseroomRepository;
 import ru.kr.repository.RoomRepository;
 
@@ -44,7 +42,7 @@ public class RoomController {
     }
 
     @PostMapping(value = "/save")
-    public String create(@RequestParam Map<String, Object> form, Model model) throws IOException {
+    public String save(@RequestParam Map<String, Object> form, Model model) throws IOException {
         ModelMapper mapper = new ModelMapper();
         Room room = mapper.map(form, Room.class);
         Long houseroomId = Long.parseLong((String) form.get("houseroom"));

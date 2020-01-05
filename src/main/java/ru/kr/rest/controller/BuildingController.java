@@ -26,7 +26,7 @@ public class BuildingController {
     }
 
     @GetMapping("/edit")
-    public String editForm(Model model) {
+    public String editForm() {
         return "edit_building";
     }
 
@@ -37,7 +37,7 @@ public class BuildingController {
     }
 
     @PostMapping(value = "/save")
-    public String create(@RequestParam("picture") MultipartFile picture, @RequestParam Map<String, Object> form, Model model) throws IOException {
+    public String save(@RequestParam("picture") MultipartFile picture, @RequestParam Map<String, Object> form, Model model) throws IOException {
         ModelMapper mapper = new ModelMapper();
         Building building = mapper.map(form, Building.class);
         if (picture != null) {

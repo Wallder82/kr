@@ -18,16 +18,8 @@ import java.util.Map;
 @Controller
 public class MainController {
 
-    @Autowired
-    private BuildingRepository buildingRepository;
-
-    @GetMapping("/greeting")
-    public String greeting(Map<String, Object> model) {
-        return "greeting";
-    }
-
     @GetMapping
-    public String main(Map<String, Object> model) {
+    public String main() {
         return "main";
     }
 

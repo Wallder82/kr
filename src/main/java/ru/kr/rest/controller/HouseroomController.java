@@ -42,7 +42,7 @@ public class HouseroomController {
     }
 
     @PostMapping(value = "/save")
-    public String create(@RequestParam Map<String, Object> form, Model model) throws IOException {
+    public String save(@RequestParam Map<String, Object> form, Model model) throws IOException {
         ModelMapper mapper = new ModelMapper();
         Houseroom houseroom = mapper.map(form, Houseroom.class);
         String buildingKadastr = (String) form.get("building");
