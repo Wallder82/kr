@@ -2,11 +2,13 @@
 
 <@c.page>
 <div class="container-fluid mt-5">
-    <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/houseroom/edit">Добавить новую квартиру</a>
+    <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/houseroom/edit">Добавить новую
+        квартиру</a>
 </div>
 <br>
 <div class="container-fluid">
-    <table class="table table-striped table-dark">
+    <table class="table table-hover">
+        <thead>
         <tr>
             <td>ID записи в бд</td>
             <td>Номер квартиры</td>
@@ -22,6 +24,8 @@
             <td></td>
             <td></td>
         </tr>
+        </thead>
+        <tbody>
         <#list houseroom_list as houseroom>
         <tr>
             <td>${houseroom.id?ifExists}</td>
@@ -35,10 +39,13 @@
             <td>${houseroom.balcony?ifExists}</td>
             <td>${houseroom.height?ifExists}</td>
             <td>${houseroom.building.kadastr?ifExists}</td>
-            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/houseroom/edit/${houseroom.id}">Изменить</a></td>
-            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" href="/houseroom/delete/${houseroom.id}">Удалить</a></td>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+                   href="/houseroom/edit/${houseroom.id}">Изменить</a></td>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+                   href="/houseroom/delete/${houseroom.id}">Удалить</a></td>
         </tr>
-    </#list>
+        </#list>
+        </tbody>
     </table>
 </div>
 </@c.page>
