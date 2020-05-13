@@ -1,10 +1,10 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<#if message??>
-    ${message}
-</#if>
 <h3 align="center">Регистрация</h3>
+<#if message??>
+<p class="text-danger" align="center">${message}</p>
+</#if>
 <div class="container mt-5">
     <form method="post" enctype="multipart/form-data" action="/registration">
         <div class="form-group row">
@@ -39,6 +39,13 @@
             <label for="middleName" class="col-sm-3 col-form-label">Отчество</label>
             <div class="col-sm-6">
                 <input class="form-control" type="text" name="middleName" id="middleName" size="30" maxlength="60"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="level" class="col-sm-3 col-form-label">Level</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="number" id="level" name="level" size="12" step="1" min="1" max="13"/>
             </div>
         </div>
 
