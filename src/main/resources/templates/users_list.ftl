@@ -1,10 +1,14 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
+<div class="container-fluid">
+    <br>
+    <br>
+    <h2 >Список пользователей</h2>
+    <br>
 <div class="container-fluid mt-5">
     <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" href="/registration">Создать пользователя</a>
 </div>
-<br>
 <div class="container-fluid">
     <table class="table table-hover">
         <thead>
@@ -40,5 +44,6 @@
         </#list>
         </tbody>
     </table>
+</div>
 </div>
 </@c.page>

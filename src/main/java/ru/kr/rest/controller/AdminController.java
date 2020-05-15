@@ -35,7 +35,10 @@ public class AdminController {
             return "registration";
         }
         newUser.setActive(true);
-        newUser.setRoles(Collections.singleton(Role.USER));
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(Role.ADMIN);
+        roles.add(Role.USER);
+        newUser.setRoles(roles);
         userRepository.saveAndFlush(newUser);
         return "login";
     }
@@ -64,6 +67,10 @@ public class AdminController {
             }
         }
         user.setRoles(roles);
+        if (Objects.nonNull(user.getId())){
+            User oldUser = userRepository.getOne(user.getId());
+            user.setPassword(oldUser.getPassword());
+        }
         userRepository.saveAndFlush(user);
         model.addAttribute("users_list" ,  userRepository.findAll());
         return "users_list";

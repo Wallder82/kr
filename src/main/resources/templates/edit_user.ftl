@@ -2,6 +2,9 @@
 
 <@c.page>
 <div class="container mt-5">
+    <br>
+    <h2 >Редактирвоание пользователя</h2>
+    <br>
     <form method="post" enctype="multipart/form-data" action="/user/save">
 
         <div class="form-group row">

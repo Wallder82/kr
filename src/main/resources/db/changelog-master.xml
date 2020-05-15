@@ -4,6 +4,5 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="1" author="Pisar Ivan" context="chema">
         <sqlFile path="V0001_INIT_DATABASE.sql" relativeToChangelogFile="true" splitStatements="false" />
-        <sqlFile path="V0002_ADD_USERS.sql" relativeToChangelogFile="true" splitStatements="false" />
     </changeSet>
 </databaseChangeLog>
