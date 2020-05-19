@@ -11,6 +11,7 @@ import ru.kr.repository.EquipmentRepository;
 import ru.kr.repository.RowRepository;
 import ru.kr.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 
@@ -38,6 +39,7 @@ public class ApplicationController {
         User user = userRepository.findByUsername(username);
         newApplication.setUser(user);
         newApplication.setStatus(Status.CREATED.toString());
+        newApplication.setCreateTime(LocalDateTime.now());
         newApplication = applicationRepository.saveAndFlush(newApplication);
         model.addAttribute("application", newApplication);
         model.addAttribute("equipment_list", equipmentRepository.findAll());

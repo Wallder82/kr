@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.1.RELEASE")
@@ -25,12 +26,36 @@ bootJar {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+dependencyManagement {
+    imports {
+        mavenBom 'org.camunda.bpm:camunda-bom:7.12.0'
+    }
+}
+
 dependencies {
+    implementation 'org.camunda.bpm:camunda-engine-plugin-spin'
+    compile group: 'org.camunda.bpm.springboot', name: 'camunda-bpm-spring-boot-starter-webapp', version: '3.4.2'
+    implementation 'org.camunda.bpm.webapp:camunda-webapp'
+    compile group: 'org.camunda.bpm.extension', name: 'camunda-bpm-reactor-core', version: '1.2'
+    compile group: 'org.camunda.bpm.extension.reactor', name: 'camunda-bpm-reactor-eventbus', version: '2.1.2'
+    implementation 'org.camunda.spin:camunda-spin-dataformat-all'
+    implementation 'org.reactivestreams:reactive-streams'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.3', ext: 'pom'
+
+
+    implementation ('javax.ws.rs:javax.ws.rs-api:2.1') {
+        force = true
+    }
+
+    implementation 'com.h2database:h2:1.4.197'
+    implementation "org.postgresql:postgresql"
+
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-test")
     compile("org.springframework.boot:spring-boot-devtools")
@@ -39,7 +64,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
 
-    compile("org.postgresql:postgresql")
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.2'
     runtime "org.liquibase:liquibase-core"
 

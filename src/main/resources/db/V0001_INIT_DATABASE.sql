@@ -132,6 +132,7 @@ create table application (
     status varchar(100),
     description varchar(100),
     user_id serial,
+    create_time timestamp,
     constraint application_pkey primary key (id),
     constraint application_user_fk foreign key (user_id) references usr(id)
 );
@@ -144,4 +145,17 @@ create table app_row (
     constraint app_row_pkey primary key (id),
     constraint app_row_application_fk foreign key (application_id) references application(id),
     constraint app_row_equipment_fk foreign key (equipment_id) references equipment(id)
-)
+);
+
+create table private_equipment (
+    id serial,
+    count numeric(9),
+    application_id serial NOT NULL,
+    equipment_id serial NOT NULL,
+    user_id serial,
+    set_time timestamp,
+    constraint private_equipment_pkey primary key (id),
+    constraint private_equipment_application_fk foreign key (application_id) references application(id),
+    constraint private_equipment_equipment_fk foreign key (equipment_id) references equipment(id),
+    constraint private_equipment_user_fk foreign key (user_id) references usr(id)
+);

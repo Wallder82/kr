@@ -6,6 +6,7 @@
 <h2 >Детали заявки</h2>
 <br>
 <h4>   Номер: ${application.id?ifExists}</h4>
+<h4>   Дата создания: ${application.createTime?ifExists}</h4>
 <h4>   Пользователь: ${application.user.surname?ifExists} ${application.user.name?ifExists} ${application.user.middleName?ifExists}</h4>
 <h4>   Уровень: ${application.user.level?ifExists}</h4>
 <br>

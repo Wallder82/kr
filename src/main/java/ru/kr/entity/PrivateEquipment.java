@@ -6,17 +6,16 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
- * Оборудование
+ * Выданное оборудование
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "application")
-public class Application {
+@Table(name = "private_equipment")
+public class PrivateEquipment {
 
     /**
      * ID записи в бд
@@ -26,28 +25,30 @@ public class Application {
     private Long id;
 
     /**
-     * Статус
+     * Количество
      */
-    private String status;
+    private Long count;
 
     /**
-     * Описание
+     * Дата выдачи
      */
-    private String description;
-
-    /**
-     * Дата создания
-     */
-    private LocalDateTime createTime;
+    private LocalDateTime setTime;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
     /**
-     * Записи
+     * Заявка
      */
-    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL)
-    private List<Row> rowList;
+    @ManyToOne
+    @JoinColumn(name = "application_id")
+    private Application application;
 
+    /**
+     * Оборудование
+     */
+    @ManyToOne
+    @JoinColumn(name = "equipment_id")
+    private Equipment equipment;
 }
