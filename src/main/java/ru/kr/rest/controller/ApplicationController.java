@@ -1,5 +1,7 @@
 package ru.kr.rest.controller;
 
+import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import ru.kr.repository.RowRepository;
 import ru.kr.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -33,6 +36,9 @@ public class ApplicationController {
     @Autowired
     private RowRepository rowRepository;
 
+    @Autowired
+    RuntimeService runtimeService;
+
     @GetMapping("/create_blank/{username}")
     private String createBlankApplication(@PathVariable String username, Model model) {
         Application newApplication = new Application();
@@ -41,6 +47,11 @@ public class ApplicationController {
         newApplication.setStatus(Status.CREATED.toString());
         newApplication.setCreateTime(LocalDateTime.now());
         newApplication = applicationRepository.saveAndFlush(newApplication);
+
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("application_id", newApplication.getId());
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("ApplicationProcess", newApplication.getId().toString(), variables);
+
         model.addAttribute("application", newApplication);
         model.addAttribute("equipment_list", equipmentRepository.findAll());
         return "application_info";
@@ -65,6 +76,8 @@ public class ApplicationController {
         if (application != null) {
             User user = application.getUser();
             applicationRepository.delete(application);
+            ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(application.getId().toString()).singleResult();
+            runtimeService.deleteProcessInstance(processInstance.getId(), "Удаление заявки");
             return "redirect:/application/list/" + user.getUsername();
         }
         else {

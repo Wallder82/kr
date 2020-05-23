@@ -7,6 +7,9 @@ import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator;
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean;
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -24,27 +27,26 @@ public class CamundaConfig {
         return new StrongUuidGenerator();
     }
 
+
     @Bean
-    public DataSource dataSource() {
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriverClass(org.postgresql.Driver.class);
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres");
-        return dataSource;
+    @ConfigurationProperties("spring.datasource.hikari")
+    public DataSource dataSource(DataSourceProperties properties) {
+        DataSourceBuilder<?> builder = properties.initializeDataSourceBuilder();
+        return builder.build();
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean
-    public SpringProcessEngineConfiguration processEngineConfiguration() {
+    public SpringProcessEngineConfiguration processEngineConfiguration(PlatformTransactionManager transactionManager,
+                                                                       DataSource dataSource) {
         SpringProcessEngineConfiguration config = new SpringProcessEngineConfiguration();
 
-        config.setDataSource(dataSource());
-        config.setTransactionManager(transactionManager());
+        config.setDataSource(dataSource);
+        config.setTransactionManager(transactionManager);
         config.setDatabaseSchemaUpdate("true");
 
         config.setHistory("audit");
@@ -58,9 +60,9 @@ public class CamundaConfig {
     }
 
     @Bean
-    public ProcessEngineFactoryBean processEngine() {
+    public ProcessEngineFactoryBean processEngine(SpringProcessEngineConfiguration processEngineConfiguration) {
         ProcessEngineFactoryBean factoryBean = new ProcessEngineFactoryBean();
-        factoryBean.setProcessEngineConfiguration(processEngineConfiguration());
+        factoryBean.setProcessEngineConfiguration(processEngineConfiguration);
         return factoryBean;
     }
 

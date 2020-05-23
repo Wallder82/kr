@@ -1,4 +1,5 @@
 <#include "security.ftl">
+<#include "camunda_deploy.ftl">
 <div class="container-fluid">
 <ul class="nav nav-pills">
     <a class="navbar-brand" href="/">My EQUIPMENT</a>
@@ -25,6 +26,9 @@
                     <a class="dropdown-item" href="/equipment/list">Оборудование</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/user/list">Пользователи</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/app/cockpit/default/#/dashboard">Camunda cockpit</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deploymentModal">Добавить новую схему</a>
                 </div>
             </li>
         </#if>

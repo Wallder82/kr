@@ -13,18 +13,52 @@
 <form method="post" enctype="multipart/form-data" action="/application/save">
     <div class="form-group">
         <label for="description"><h4>Описание</h4></label>
-        <textarea class="form-control" id="description" name="description" rows="3" maxlength="512">${application.description?ifExists}</textarea>
+        <textarea class="form-control" id="description" name="description" rows="3" maxlength="512" <#if application.status != "CREATED">disabled</#if> >${application.description?ifExists}</textarea>
     </div>
-
     <div class="form-group row">
         <div class="col-sm-3">
-            <button type="submit" class="btn btn-primary">Сохранить заявку</button>
+            <#if application.status == "CREATED">
+                <button type="submit" class="btn btn-primary">Сохранить заявку</button>
+            </#if>
             <a class="btn btn-danger" role="button" aria-pressed="true" href="/application/delete/${application.id}">Удалить заявку</a>
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <input type="hidden" name="application_id" value="${application.id}"/>
 </form>
+
+<#if application.status == "CREATED">
+<form method="post" enctype="multipart/form-data" action="/camunda/complete/user_task">
+    <button type="submit" class="btn btn-primary">Отправить в обработку</button>
+    <input type="hidden" name="action" value="SENT"/>
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    <input type="hidden" name="application_id" value="${application.id}"/>
+</form>
+<#else>
+    <#if isManager && application.status == "SENT">
+        <form method="post" enctype="multipart/form-data" action="/camunda/complete/user_task">
+            <button type="submit" class="btn btn-primary">Подтвердить</button>
+            <input type="hidden" name="action" value="APPROVED"/>
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <input type="hidden" name="application_id" value="${application.id}"/>
+        </form>
+        <form method="post" enctype="multipart/form-data" action="/camunda/complete/user_task">
+            <button type="submit" class="btn btn-primary">Отклонить</button>
+            <input type="hidden" name="action" value="APPROVED"/>
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <input type="hidden" name="application_id" value="${application.id}"/>
+        </form>
+    </#if>
+    <#if isAdmin && application.status == "APPROVED">
+        <form method="post" enctype="multipart/form-data" action="/camunda/complete/user_task">
+            <button type="submit" class="btn btn-primary">Подтвердить выполнение</button>
+            <input type="hidden" name="action" value="COMPLETED"/>
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <input type="hidden" name="application_id" value="${application.id}"/>
+        </form>
+    </#if>
+</#if>
+
 <br>
 <br>
 <#if application.rowList??>
@@ -47,17 +81,24 @@
             <td>${row.equipment.name?ifExists}</td>
             <td>${row.equipment.description?ifExists}</td>
             <td>${row.count?ifExists}</td>
+            <#if application.status == "CREATED">
             <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
                    href="/application/row/delete/${row.id}">Удалить</a></td>
+            </#if>
         </tr>
         </#list>
         </tbody>
     </table>
 </div>
 </#if>
+
+<#if application.status == "CREATED">
 <div class="container-fluid mt-5">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rowModal" data-whatever="@mdo">Добавить новое оборудование в заявку</button>
 </div>
+<#else>
+<a class="btn btn-danger" role="button" aria-pressed="true" href="/">Выйти</a>
+</#if>
 
 <div class="modal fade" id="rowModal" tabindex="-1" role="dialog" aria-labelledby="rowModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

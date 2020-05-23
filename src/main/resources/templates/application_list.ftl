@@ -19,11 +19,16 @@
         <tbody>
         <#list application_list as application>
         <tr>
-            <td>${application.id?ifExists}</td>
-            <td>${application.status?ifExists}</td>
+            <td>${application.id}</td>
+            <td>${application.status}</td>
             <td>${application.description?ifExists}</td>
+            <#if application.status == "CREATED">
             <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
                    href="/application/edit/${application.id}">Изменить</a></td>
+            <#else>
+            <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+                   href="/application/edit/${application.id}">Информация</a></td>
+            </#if>
             <td><a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
                    href="/application/delete/${application.id}">Удалить</a></td>
         </tr>
