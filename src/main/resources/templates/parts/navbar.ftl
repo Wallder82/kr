@@ -10,12 +10,15 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Заявки</a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Мое оборудование</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <#if isAdmin || isManager>
-            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/private_equipment/list/${session_user.username}">Мое оборудование</a>
             <a class="dropdown-item" href="/application/list/${session_user.username}">Мои заявки</a>
+            <#if isManager>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/application/list/review/SENT">Заявки на рассмотрение</a>
+            </#if>
+            <#if isAdmin>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/application/list/review/APPROVED">Заявки на выдачу</a>
             </#if>
         </div>
     </li>

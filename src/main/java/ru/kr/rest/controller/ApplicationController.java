@@ -16,6 +16,7 @@ import ru.kr.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 @Controller
@@ -58,9 +59,15 @@ public class ApplicationController {
     }
 
     @GetMapping("/list/{username}")
-    private String getList(@PathVariable String username, Model model) {
+    private String getListByUsername(@PathVariable String username, Model model) {
         User user = userRepository.findByUsername(username);
         model.addAttribute("application_list", applicationRepository.findByUserId(user.getId()));
+        return "application_list";
+    }
+
+    @GetMapping("/list/review/{status}")
+    private String getListByStatus(@PathVariable String status, Model model) {
+        model.addAttribute("application_list", applicationRepository.findByStatus(status));
         return "application_list";
     }
 
@@ -77,7 +84,9 @@ public class ApplicationController {
             User user = application.getUser();
             applicationRepository.delete(application);
             ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(application.getId().toString()).singleResult();
-            runtimeService.deleteProcessInstance(processInstance.getId(), "Удаление заявки");
+            if (Objects.nonNull(processInstance)) {
+                runtimeService.deleteProcessInstance(processInstance.getId(), "Удаление заявки");
+            }
             return "redirect:/application/list/" + user.getUsername();
         }
         else {
