@@ -44,7 +44,7 @@
         </form>
         <form method="post" enctype="multipart/form-data" action="/camunda/complete/user_task">
             <button type="submit" class="btn btn-primary">Отклонить</button>
-            <input type="hidden" name="action" value="APPROVED"/>
+            <input type="hidden" name="action" value="REJECTED"/>
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <input type="hidden" name="application_id" value="${application.id}"/>
         </form>

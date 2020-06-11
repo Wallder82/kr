@@ -24,7 +24,6 @@ public class ManagerTaskListeren implements TaskListener {
         } else {
             application.setStatus(Status.REJECTED.toString());
         }
-        application.setStatus(Status.APPROVED.toString());
         applicationRepository.saveAndFlush(application);
     }
 }
